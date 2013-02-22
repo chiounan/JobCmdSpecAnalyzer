@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<job protectionGroupId="11111111-1111-1111-1111-111111111111" id="11111111-1111-1111-1111-111111111111" name="My Disk Backup Plan" type="pmbackup" sessionNo="11111111-1111-1111-1111-111111111111" workerServerName="bsTCPC" manageServerName="bsTCCDP1">
+  <client id="712214d2-26ac-4050-a642-b4f558168758" hostName="mssql_db" />
+  
+  <!-- "update" = (1) apply to configurations in "option/sync" section                                           -->
+  <!--            (2) recreate disk protection if target disk was changed (explictly listed in "disks")    -->
+  <!--            (3) reset exclusion range of disk protection according to volume explictly listed in "volumes" -->
+  <!--            (4) recalculate UMAP data if target disk size was expanded                                     -->
+  <!--            (5) reassociate with group protection according to "groupName" setting                         -->
+  <!-- method   = "inband", "disksafe" or "lvm"                                                                  -->
+  <!-- mode     = "disklevel" or "filelevel"                                                                     -->
+  <command name="update" method="disksafe" mode="disklevel" token="66666666-7777-8888-9999-000000000000">
+    <disks>
+      <disk id="012214d2-26ac-4050-a642-b4f558168758" groupName="">
+        <sourcedisk uniqueName="DELL____MD3000__________6001e4f00042701100000a154b85436a" signature="0x9f199f19" guid="" />
+        <targetdisk serverName="cdp_disksafe_svr1" vid="1023" isNewAllocation="no" isExpanded="yes" />
+      </disk>
+      <disk id="022214d2-26ac-4050-a642-b4f558168758" groupName="">
+        <sourcedisk uniqueName="DELL____MD3000__________6001e4f00042701100000a154b85436b" signature="" guid="dd048c47-ef75-4388-83d8-8d85a1a1f5f1">
+          <exclusion partNo="2" />
+          <exclusion partNo="3" />
+        </sourcedisk>
+        <targetdisk serverName="cdp_disksafe_svr1" vid="1024" isNewAllocation="yes" isExpanded="no" />
+      </disk>
+      <disk id="032214d2-26ac-4050-a642-b4f558168758" groupName="sql_db_ALL">
+        <sourcedisk uniqueName="DELL____MD3000__________6001e4f00042701100000a154b85436c" signature="0x4b0cd56e" guid="" />
+        <targetdisk serverName="cdp_disksafe_svr1" vid="1025" isNewAllocation="yes" isExpanded="no" />
+      </disk>
+      <disk id="052214d2-26ac-4050-a642-b4f558168758" groupName="">
+        <sourcedisk uniqueName="DELL____MD3000__________6001e4f00042701100000a154b85436e" signature="" guid="295e7f24-d1a1-4e76-b38a-905e8617b467" />
+        <targetdisk serverName="cdp_disksafe_svr2" vid="1026" isNewAllocation="no" isExpanded="no" />
+      </disk>
+      <volumes>
+        <exclusion volume="C:" />
+        <exclusion volume="D:" />
+        <exclusion volume="E:" />
+        <exclusion volume="G:\DB_Mount" />
+      </volumes>
+    </disks>
+
+    <!-- Option -->
+    <option>
+      <!-- Sync Setting -->
+      <sync watermarkTriggerInMB="100" microScanByte="4096" isEncryption="no">
+        <encrypt keyName="" keyCipher="" />
+      </sync>
+	  
+      <!-- Snapshot Retention Setting -->
+      <!-- type = "none"    , keep all the snapshots this system can support 											-->
+      <!-- type = "basic"   , keep the [number] of most recent snapshots or keep snapshots for a certain amount of time -->
+	    <!-- basic          , keep [number] of snapshot 																-->
+        <!--                   unit = "snapshots" | "hours" | "days" | "weeks" | "months"                               -->
+      <!-- type = "advanced", apply settings listed as hourly, daily, weekly and monthly								-->
+        <!-- hourly         , keep hourly snapshots for past [number] hours     										-->
+        <!--                   use snapshot closest to [Minute]                                                         -->
+        <!-- daily          , keep daily snapshots for past [number] days       										-->
+        <!--                   use hourly snapshot closest to [Hour]            										-->
+        <!-- weekly         , keep weekly snapshots for past [number] weeks     										-->
+        <!--                   use daily snapshot closest to [DayOfWeek]        										-->
+        <!-- monthly        , keep monthly snapshots for past [number] months   										-->
+        <!--                   use daily snapshot closest to [DayOfMonth]       										-->
+      <!-- ex: <retention type="none">
+                   <basic count="0" unit="" />
+               </retention>
+      -->	 
+      <!-- ex: <retention type="basic">
+                   <basic count="45" unit="hours" />
+               </retention>
+      -->
+      <retention type="none" />
+    </option>
+  </command>
+</job>

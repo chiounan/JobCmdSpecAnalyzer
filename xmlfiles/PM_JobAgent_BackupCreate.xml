@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<job protectionGroupId="11111111-1111-1111-1111-111111111111" id="11111111-1111-1111-1111-111111111111" name="My Disk Backup Plan" type="pmbackup" sessionNo="11111111-1111-1111-1111-111111111111" workerServerName="bsTCPC" manageServerName="bsTCCDP1">
+  <client id="712214d2-26ac-4050-a642-b4f558168758" hostName="mssql_db" />
+
+  <!-- "create" = (1) create disk and group protecitons (it fails if "sourcedisk" was already backed up to other "target" ) -->
+  <!--            (2) join disk to group protection                                                                         -->
+  <!-- method   = "inband", "disksafe" or "lvm"                                                                             -->
+  <!-- mode     = "disklevel" or "filelevel"                                                                                -->
+  <command name="create" method="disksafe" mode="disklevel" token="11111111-2222-3333-4444-555555555555">
+    <disks>
+      <disk id="012214d2-26ac-4050-a642-b4f558168758" groupName="sql_db_ALL">
+        <sourcedisk uniqueName="DELL____MD3000__________6001e4f00042701100000a154b85436a" signature="0x9f199f19" guid="">
+          <exclusion partNo="2" />
+          <exclusion partNo="3" />
+        </sourcedisk>
+        <targetdisk serverName="cdp_disksafe_svr1" vid="1023" isNewAllocation="no" isExpanded="no" />
+      </disk>
+      <disk id="052214d2-26ac-4050-a642-b4f558168758" groupName="sql_db_ALL">
+        <sourcedisk uniqueName="DELL____MD3000__________6001e4f00042701100000a154b85436e" signature="" guid="295e7f24-d1a1-4e76-b38a-905e8617b467">
+          <exclusion partNo="1" />
+        </sourcedisk>
+        <targetdisk serverName="cdp_disksafe_svr1" vid="1027" isNewAllocation="yes" isExpanded="no" />
+      </disk>
+      <volumes>
+        <exclusion volume="C:" />
+        <exclusion volume="D:" />
+      </volumes>
+    </disks>
+
+    <!-- Option -->
+    <option>
+      <!-- Sync Setting -->
+      <sync watermarkTriggerInMB="10" microScanByte="4096" isEncryption="no">
+        <encrypt keyName="" keyCipher="" />
+      </sync>
+
+      <!-- Snapshot Retention Setting -->
+      <!-- type = "none"    , keep all the snapshots this system can support 											-->
+      <!-- type = "basic"   , keep the [number] of most recent snapshots or keep snapshots for a certain amount of time -->
+	    <!-- basic          , keep [number] of snapshot 																-->
+        <!--                   unit = "snapshots" | "hours" | "days" | "weeks" | "months"                               -->
+      <!-- type = "advanced", apply settings listed as hourly, daily, weekly and monthly								-->
+        <!-- hourly         , keep hourly snapshots for past [number] hours     										-->
+        <!--                   use snapshot closest to [Minute]                                                         -->
+        <!-- daily          , keep daily snapshots for past [number] days       										-->
+        <!--                   use hourly snapshot closest to [Hour]            										-->
+        <!-- weekly         , keep weekly snapshots for past [number] weeks     										-->
+        <!--                   use daily snapshot closest to [DayOfWeek]        										-->
+        <!-- monthly        , keep monthly snapshots for past [number] months   										-->
+        <!--                   use daily snapshot closest to [DayOfMonth]       										-->
+      <!-- ex: <retention type="none">
+                   <basic count="0" unit="" />
+               </retention>
+      -->	 
+      <!-- ex: <retention type="basic">
+                   <basic count="45" unit="hours" />
+               </retention>
+      -->
+      <retention type="advanced">
+        <basic count="0" unit="" />
+	    <hourly count="16" minuteOffset="0" />
+	    <daily count="5" hourOffset="0" />
+        <weekly count="4" dayOfWeek="1" />
+        <monthly count="6" dayOfMonth="30" />
+      </retention>
+    </option>
+  </command>
+</job>

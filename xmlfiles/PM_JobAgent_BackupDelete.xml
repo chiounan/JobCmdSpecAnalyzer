@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<job protectionGroupId="11111111-1111-1111-1111-111111111111" id="11111111-1111-1111-1111-111111111111" name="My Disk Backup Plan" type="pmbackup" sessionNo="11111111-1111-1111-1111-111111111111" workerServerName="bsTCPC" manageServerName="bsTCCDP1">
+  <client id="712214d2-26ac-4050-a642-b4f558168758" hostName="mssql_db" />
+  
+  <!-- "delete" = delete disk protection(s) (also delete group protection without disk protection joined) -->
+  <!-- method   = "inband", "disksafe" or "lvm"                                                           -->
+  <!-- mode     = "disklevel" or "filelevel"                                                              -->
+  <command name="delete" method="disksafe" mode="disklevel" token="00000000-2222-4444-6666-888888888888">
+    <disks>
+      <disk id="022214d2-26ac-4050-a642-b4f558168758">
+        <sourcedisk uniqueName="DELL____MD3000__________6001e4f00042701100000a154b85436a" signature="0x9f199f19" guid="" /> 
+      </disk>
+      <disk id="032214d2-26ac-4050-a642-b4f558168759">
+        <sourcedisk uniqueName="DELL____MD3000__________6001e4f00042701100000a154b85436e" signature="" guid="295e7f24-d1a1-4e76-b38a-905e8617b467" /> 
+      </disk>	   
+    </disks>
+  </command>
+</job>

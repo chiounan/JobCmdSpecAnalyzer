@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<job id="11111111-1111-1111-1111-111111111111" name="My Disk Backup Plan" type="pmbackup" sessionNo="11111111-1111-1111-1111-111111111111" workerServerName="bsTCPC" manageServerName="bsTCCDP1">
+  <client id="712214d2-26ac-4050-a642-b4f558168758" hostName="mssql_db" localTimeUtc="1305523867" />
+
+  <command name="return" method="disksafe" mode="disklevel" token="11111111-9999-8888-7777-333333333333">
+    <message type="discovery" subType="" />
+    
+    <!-- System, Disk, Volume and Application Info -->
+    <data>
+      <system>
+        <os platform="Windows" ipAddress="10.3.1.101" />
+        <fcprop>
+          <wwpn portNo="04-1e-00" address="21-00-00-1b-32-12-be-51" />
+        </fcprop>
+        <iscsiprop>
+          <initiator type="iSCSISW" address="iqn.1991-05.com.microsoft:defiant" />
+          <initiator type="iSCSISW" address="iqn.1991-05.com.microsoft:andy" />
+        </iscsiprop>
+      </system>
+      
+      <!-- Disk -->
+        <!-- signature     = disk signature for MBR                      -->
+        <!-- guid          = disk guid for GPT                           -->
+        <!-- uniqueName    = the unique id that DiskSafe driver assigned -->
+        <!-- occupiedBytes = occupied space of file system usage         -->
+      <disks>
+        <disk id="712214d2-26ac-4050-a642-b4f558168758" role="original">
+          <device name="disk 0" totalBytes="12884901888" />     
+          <attribute type="Basic" style="MBR" signature="0x9F199F19" guid="" />
+          <disksafe uniqueName="VMware__Virtual_disk____(2-0-0-0)" occupiedBytes="12880000000" />
+        </disk>     
+        <disk id="712214d2-26ac-4050-a642-b4f558168759" role="backup">
+          <device name="disk 3" totalBytes="1073741824" />   
+          <attribute type="Basic" style="MBR" signature="0x0" guid="" />
+          <disksafe uniqueName="FALCON__IPSTOR_DISK_____6000d77c5ebad0d0fc5400004dd0b32c" occupiedBytes="0" />       
+          <backupinfo originalId="712214d2-26ac-4050-a642-b4f558168758" serverId="812214d2-26ac-4050-a642-b4f558168758" serverName="TC-BS1" vid="8141" />
+        </disk>    
+      </disks>
+
+      <!-- Volume -->
+      <volumes>
+        <volume serialNum="2958518146" occupiedBytes="128800000">
+          <extents>
+            <extent diskId="712214d2-26ac-4050-a642-b4f558168758" />
+            <extent diskId="712214d2-26ac-4050-a642-b4f558168759" />
+          </extents>
+          <mounts>
+            <mount path="C:\" />
+          </mounts>
+        </volume>
+        <volume serialNum="3967830505" occupiedBytes="128800000">     
+          <extents>
+            <extent diskId="712214d2-26ac-4050-a642-b4f558168759" />
+          </extents>
+          <mounts>
+            <mount path="E:\" />
+            <mount path="D:\Tmp" />
+          </mounts>
+        </volume>
+      </volumes>
+      
+      <!-- Application -->
+      <applications>
+        <application id="212214d2-26ac-4050-a642-b4f558168758" name="MS Exchange">
+          <paths>
+            <path mountPath="E:\" />
+          </paths>
+        </application>
+      </applications>
+    </data>
+  </command>
+</job>
