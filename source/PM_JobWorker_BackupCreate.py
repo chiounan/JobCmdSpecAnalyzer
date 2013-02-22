@@ -71,4 +71,3 @@ client_name = parseXAttributes(xmlRoot, 'client', 'name')
 server_id = parseXAttributes(xmlRoot, 'server', 'id')
 # All sourcedisk id, not know which sourcedisk id belongs to which client (id) 
 sourcedisk_id = parseXAttributes(xmlRoot, 'sourcedisk', 'id')
-

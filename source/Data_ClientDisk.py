@@ -38,7 +38,7 @@ for i in range(len(disksAttributes)):
 
 # get volume attributes
 volumesAttributes = parseVolumesAttributes(xmlRoot)
-print ('volumesAttributes[]: %s' % volumesAttributes)
+#print ('volumesAttributes[]: %s' % volumesAttributes)
 volumeSerial = []
 for i in range(len(volumesAttributes)):
 #    print ('voluem[%d]: %s' % (i, volumesAttributes[i]))
@@ -46,4 +46,8 @@ for i in range(len(volumesAttributes)):
 #    print (volumeSerial)
 
 disksAttributes = parseDataClientDiskAttributes(xmlRoot)
-print (disksAttributes)
+#print (disksAttributes)
+
+os_ipAddress = parseXAttributes(xmlRoot, 'os', 'ipAddress')
+
+disk_id = parseXAttributes(xmlRoot, 'disk', 'id')

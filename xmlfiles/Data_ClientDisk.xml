@@ -24,7 +24,8 @@
         <!-- uniqueName    = the unique id that DiskSafe driver assigned -->
         <!-- occupiedBytes = occupied space of file system usage         -->
       <disks>
-        <disk id="712214d2-26ac-4050-a642-b4f558168758" role="original">
+        <!--disk id="712214d2-26ac-4050-a642-b4f558168758" role="original"-->
+        <disk id="712214d2-26ac-4050-a642-b4f55816872b" role="original">
           <device name="disk 0" totalBytes="12884901888" />     
           <attribute type="Basic" style="MBR" signature="0x9F199F19" guid="" />
           <disksafe uniqueName="VMware__Virtual_disk____(2-0-0-0)" occupiedBytes="12880000000" />
