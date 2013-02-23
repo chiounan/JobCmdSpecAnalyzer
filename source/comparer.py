@@ -17,7 +17,7 @@ client_num = len(PM_JobWorker_BackupCreate.clientsAttributes)
 #print ('Wrk: client name: %s' % PM_JobWorker_BackupCreate.client_name)
 #print ('Data_ClientDisk: disk id: %s' % Data_ClientDisk.disk_id)
 
-def compare_loop(array_i, array_j):
+def compare_array(array_i, array_j):
     found_array = []
     num_i = len(array_i)
     num_j = len(array_j)
@@ -26,13 +26,16 @@ def compare_loop(array_i, array_j):
             if array_i[i] == array_j[j]:
                 found_array.append(array_i[i])
     return found_array
-                           
+
+def compare_sets(set1, set2):
+    return set(set1) & set(set2)
+                               
 #for i in range(client_num):
 #    client_id = PM_JobWorker_BackupCreate.clientsAttributes[i]['id']
 #    if PM_JobAgent_BackupCreate.clientId == client_id:
 #        print ('client id: %s found' % client_id)
 
-client_id_found_array = compare_loop(PM_JobAgent_BackupCreate.client_id, PM_JobWorker_BackupCreate.client_id)
+client_id_found_array = compare_array(PM_JobAgent_BackupCreate.client_id, PM_JobWorker_BackupCreate.client_id)
 print ('Client id found: %s' % client_id_found_array)
 
 ##print (PM_JobWorker_BackupCreate.sourcedisk_id)
@@ -43,5 +46,11 @@ print ('Client id found: %s' % client_id_found_array)
 #            print ('disk id: %s found' % disk_id)        
 ## better way is use comapre_loop
 ## compare disk id between Data_ClientDisk and PM_JobWorker_BackupCreate
-disk_id_found_array = compare_loop(Data_ClientDisk.disk_id, PM_JobWorker_BackupCreate.sourcedisk_id)
-print ('Found disk id: %s' % disk_id_found_array) 
+disk_id_found_array = compare_array(Data_ClientDisk.disk_id, PM_JobWorker_BackupCreate.sourcedisk_id)
+print ('Found disk id: %s' % disk_id_found_array)
+
+client_id_found_set = compare_sets(PM_JobAgent_BackupCreate.client_id, PM_JobWorker_BackupCreate.client_id)
+print ('Client id found: %s' % client_id_found_set)
+
+disk_id_found_set = compare_sets(Data_ClientDisk.disk_id, PM_JobWorker_BackupCreate.sourcedisk_id)
+print ('Found disk id: %s' % disk_id_found_set) 

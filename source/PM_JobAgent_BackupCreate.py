@@ -18,7 +18,7 @@ commandAttributes = parseCommnad(xmlRoot)
 #print ('commandAttributes: %s' % commandAttributes)
 
 optionAttributes = parseOption(xmlRoot)
-#print ('optionAttributes: %s' % optionAttributes)
+print ('optionAttributes: %s' % optionAttributes)
 
 client = xmlRoot.getElementsByTagName('client')[0]
 clientId = client.getAttribute('id')
