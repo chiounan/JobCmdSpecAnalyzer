@@ -17,6 +17,9 @@ jobAttributes = parseJob(xmlRoot)
 commandAttributes = parseCommnad(xmlRoot)
 #print ('commandAttributes: %s' % commandAttributes)
 
+clientAttributes = parseClient(xmlRoot)
+#print ('clientAttributes: %s' % clientAttributes)
+
 client = xmlRoot.getElementsByTagName('client')[0]
 clientId = client.getAttribute('id')
 #print ('JobAgt ClientId: %s' % clientId)
@@ -51,3 +54,4 @@ disksAttributes = parseDataClientDiskAttributes(xmlRoot)
 os_ipAddress = parseXAttributes(xmlRoot, 'os', 'ipAddress')
 
 disk_id = parseXAttributes(xmlRoot, 'disk', 'id')
+client_id = parseXAttributes(xmlRoot, 'client', 'id')

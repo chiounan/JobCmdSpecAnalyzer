@@ -12,11 +12,16 @@ xmlRoot = parse(xmlFile)
 closeXmlFile(xmlFile)
 
 jobAttributes = parseJob(xmlRoot)
-print ('jobAttributes: %s' % jobAttributes)
+#print ('jobAttributes: %s' % jobAttributes)
 
 commandAttributes = parseCommnad(xmlRoot)
-print ('commandAttributes: %s' % commandAttributes)
+#print ('commandAttributes: %s' % commandAttributes)
+
+clientAttributes = parseClient(xmlRoot)
+#print ('clientAttributes: %s' % clientAttributes)
 
 client = xmlRoot.getElementsByTagName('client')[0]
 clientId = client.getAttribute('id')
-print ('JobAgt ClientId: %s' % clientId)
+#print ('JobAgt ClientId: %s' % clientId)
+
+disk_id = parseXAttributes(xmlRoot, 'disk', 'id')

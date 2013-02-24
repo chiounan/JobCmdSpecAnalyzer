@@ -18,7 +18,10 @@ commandAttributes = parseCommnad(xmlRoot)
 #print ('commandAttributes: %s' % commandAttributes)
 
 optionAttributes = parseOption(xmlRoot)
-print ('optionAttributes: %s' % optionAttributes)
+#print ('optionAttributes: %s' % optionAttributes)
+
+clientAttributes = parseClient(xmlRoot)
+#print ('clientAttributes: %s' % clientAttributes)
 
 client = xmlRoot.getElementsByTagName('client')[0]
 clientId = client.getAttribute('id')
@@ -28,6 +31,7 @@ clientHostName = client.getAttribute('hostName')
 
 client_id = parseXAttributes(xmlRoot, 'client', 'id')
 diskId = parseXAttributes(xmlRoot, 'disk', 'id')
+disk_id = parseXAttributes(xmlRoot, 'disk', 'id')
 #for i in range(len(diskId)):
 #    print ('diskId[%d]:%s' % (i, diskId[i]))
 

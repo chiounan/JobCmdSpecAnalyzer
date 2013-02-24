@@ -41,6 +41,15 @@ def parseCommnad(xmlRoot):
     commnadAttributes['commandMode'] = commandMode
     return commnadAttributes
 
+def parseClient(xmlRoot):
+    clientAttributes = {}
+    client = xmlRoot.getElementsByTagName('client')[0]
+    clientId = client.getAttribute('id')
+    clientHostName = client.getAttribute('hostName')
+    clientAttributes['id'] = clientId
+    clientAttributes['hostName'] = clientHostName
+    return clientAttributes
+
 # input full path of XML file - filename
 # output file handler - xmlFile
 # exception handler - IOError
@@ -278,7 +287,7 @@ def parseDataClientDiskAttributes(xmlRoot):
             singleDiskAttributes['serverId'] = backupinfo.getAttribute('serverId')
             singleDiskAttributes['serverName'] = backupinfo.getAttribute('serverName')
             singleDiskAttributes['vid'] = backupinfo.getAttribute('vid')
-        print ('singleDiskAttributes[]: %s' % singleDiskAttributes)
+#        print ('singleDiskAttributes[]: %s' % singleDiskAttributes)
         disksAttributes.append(singleDiskAttributes)
     return disksAttributes
 
